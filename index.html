@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Amie · The White Jindo</title>
+<meta name="description" content="The story of Amie, a white Jindo. A birthday present for Lauren.">
+<meta property="og:title" content="Amie · The White Jindo">
+<meta property="og:description" content="A good girl. Mostly. Happy Birthday, Lauren.">
+<meta property="og:image" content="https://jakenbear.github.io/amie/og.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f7f1e6">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;700&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/full/a1352.webp" media="(min-aspect-ratio: 1/1)">
+<link rel="preload" as="image" href="img/full/a1623.webp" media="(max-aspect-ratio: 1/1)">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="dots" aria-label="Sections">
+  <a href="#story" title="Her story"></a>
+  <a href="#jindo" title="Jindo facts"></a>
+  <a href="#devil" title="The White Devil"></a>
+  <a href="#admirers" title="Admirers"></a>
+  <a href="#lauren" title="For Lauren"></a>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <picture>
+    <source media="(max-aspect-ratio: 1/1)" srcset="img/full/a1623.webp">
+    <img class="hero-img" src="img/full/a1352.webp" alt="Amie, a white Jindo, lying in the grass at the park" fetchpriority="high">
+  </picture>
+  <div class="hero-shade"></div>
+  <div class="hero-text">
+    <p class="kicker">A white Jindo · est. 2022</p>
+    <h1 class="hero-title" aria-label="Amie"><span>A</span><span>m</span><span>i</span><span>e</span></h1>
+    <p class="hero-sub">Good girl. Mostly. Chipmunk enthusiast. Professional napper.</p>
+  </div>
+  <a class="scroll-cue" href="#story" aria-label="Scroll to her story"><span></span></a>
+</header>
+
+<main>
+
+<!-- STORY -->
+<section id="story" class="story">
+  <div class="section-head reveal">
+    <p class="eyebrow">Chapter one through now</p>
+    <h2>Her Story</h2>
+    <p class="lede">From a small white blur to the undisputed ruler of the park. Tap any burst to flip through it again, tap any photo to see it big.</p>
+  </div>
+  <div id="timeline" class="timeline"></div>
+</section>
+
+<!-- NAP STRIP -->
+<section class="naps">
+  <div class="section-head reveal">
+    <p class="eyebrow">Intermission</p>
+    <h2>The Nap Olympics</h2>
+    <p class="lede">Gold medals in curling, sprawling, and the extremely difficult “one eye open”.</p>
+  </div>
+  <div class="nap-strip" id="napStrip"></div>
+</section>
+
+<!-- JINDO FACTS -->
+<section id="jindo" class="jindo">
+  <div class="section-head reveal">
+    <p class="eyebrow">진돗개 · Know your breed</p>
+    <h2>Jindo Facts</h2>
+    <p class="lede">Amie isn’t just a dog. She’s a Jindo, which apparently comes with paperwork.</p>
+  </div>
+  <div class="facts" id="facts"></div>
+</section>
+
+<!-- WHITE DEVIL -->
+<section id="devil" class="devil">
+  <div class="devil-inner">
+    <div class="section-head reveal">
+      <p class="eyebrow devil-eyebrow">Classified · Eastern Chipmunk Council</p>
+      <h2 class="devil-title">The White Devil</h2>
+      <div class="devil-memo reveal">
+        <p><strong>To:</strong> All burrows, east side of the park<br><strong>Re:</strong> Her. Again.</p>
+        <p>Fellow chipmunks. She has been sighted again. Pale as a snowbank, silent as a cloud, and she <em>knows which tree you live in</em>. Our elders called her a ghost. Our younger members call her <strong>The White Devil</strong>. We call her nothing out loud, because she can hear the word “chipmunk” from three fields away.</p>
+        <p>She does not bark. She does not blink. She simply <em>stares at the base of the tree</em> until someone panics. Do not be the one who panics.</p>
+        <p>Stay in your burrows. Keep your cheeks full. Trust no white fluff.</p>
+        <p class="sig">— Chief Acorn Officer, on behalf of the Council</p>
+      </div>
+    </div>
+    <div class="wanted-wall" id="wanted"></div>
+    <h3 class="devil-sub reveal">Surveillance footage</h3>
+    <div class="evidence" id="evidence"></div>
+    <h3 class="devil-sub reveal">Know your enemy (and yourself): chipmunk facts</h3>
+    <div class="chip-facts" id="chipFacts"></div>
+  </div>
+</section>
+
+<!-- ADMIRERS -->
+<section id="admirers" class="admirers">
+  <div class="section-head reveal">
+    <p class="eyebrow">Collect them all</p>
+    <h2>Amie’s Admirers</h2>
+    <p class="lede">A series of trading cards honouring the many (very intact) gentlemen of the park who have tried their luck. None of them have succeeded. She’s got standards.</p>
+  </div>
+  <div class="cards" id="cards"></div>
+</section>
+
+<!-- LAUREN -->
+<section id="lauren" class="lauren">
+  <div class="letter reveal">
+    <img class="letter-photo" src="img/full/a1769.webp" alt="Amie looking up" loading="lazy" decoding="async">
+    <p class="eyebrow">A note from Amie</p>
+    <h2 class="bday">Happy Birthday, <span>Lauren</span></h2>
+    <div class="note">
+      <p>Dear Lauren,</p>
+      <p>I made you this website. Well, I posed for it. Same thing.</p>
+      <p>Thank you for every walk, every treat, every belly rub, and every time you let me have the good spot on the couch. Thank you for pretending not to notice the white fur on everything you own. It’s a gift. You’re welcome.</p>
+      <p>I hope your birthday has zero chipmunks (unless they’re for me), lots of naps, and so many snacks.</p>
+      <p>I love you more than the squeaky toy. Don’t tell the squeaky toy.</p>
+      <p class="sign">Love, and a little bit of shedding,<br><span>Amie</span> 🐾</p>
+    </div>
+    <button class="confetti-btn" id="confettiBtn" type="button">Throw a party 🎉</button>
+  </div>
+  <footer class="foot">Made with love (and treats) for Lauren · <a href="#top">back to the top ↑</a></footer>
+</section>
+
+</main>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lb-close" aria-label="Close">×</button>
+  <button class="lb-prev" aria-label="Previous">‹</button>
+  <img alt="Amie">
+  <button class="lb-next" aria-label="Next">›</button>
+  <p class="lb-cap"></p>
+</div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script src="data/photos.js"></script>
+<script src="data/admirers.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
