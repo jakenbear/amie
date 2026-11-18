@@ -18,8 +18,8 @@
   /* ---------- lightbox ---------- */
   const lb = $('#lightbox'), lbImg = $('img', lb), lbCap = $('.lb-cap', lb);
   let lbList = [], lbIdx = 0;
-  const lbShow = () => { const p = byId[lbList[lbIdx]]; lbImg.src = full(p.id); lbCap.textContent = `${fmt(p.d) || 'Date unknown'} · ${lbIdx + 1} / ${lbList.length}`; lbImg.style.animation = 'none'; lbImg.offsetHeight; lbImg.style.animation = ''; };
-  const openLB = (list, id) => { lbList = list; lbIdx = Math.max(0, list.indexOf(id)); lb.hidden = false; document.body.style.overflow = 'hidden'; lbShow(); };
+  const lbShow = () => { const it = lbList[lbIdx]; if (typeof it === 'object') { lbImg.src = it.src; lbCap.textContent = `${it.cap || ''} · ${lbIdx + 1} / ${lbList.length}`; } else { const p = byId[it]; lbImg.src = full(p.id); lbCap.textContent = `${fmt(p.d) || 'Date unknown'} · ${lbIdx + 1} / ${lbList.length}`; } lbImg.style.animation = 'none'; lbImg.offsetHeight; lbImg.style.animation = ''; };
+  const openLB = (list, id) => { lbList = list; lbIdx = typeof id === 'number' ? id : Math.max(0, list.indexOf(id)); lb.hidden = false; document.body.style.overflow = 'hidden'; lbShow(); };
   const closeLB = () => { lb.hidden = true; document.body.style.overflow = ''; };
   const step = d => { lbIdx = (lbIdx + d + lbList.length) % lbList.length; lbShow(); };
   $('.lb-close', lb).onclick = closeLB; $('.lb-prev', lb).onclick = () => step(-1); $('.lb-next', lb).onclick = () => step(1);

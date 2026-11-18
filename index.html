@@ -163,6 +163,21 @@
     </div>
     <button class="confetti-btn" id="confettiBtn" type="button">Throw a party 🎉</button>
   </div>
+  <!-- SECRET STASH: photos are AES-GCM encrypted (stash/*.bin); decrypted only in the browser with the password -->
+  <div class="stash reveal" id="stash">
+    <div class="vault" id="vault">
+      <div class="vault-door" aria-hidden="true"><span class="dial"><i></i></span><span class="vault-paw">🐾</span></div>
+      <p class="eyebrow">Top secret · For Lauren’s eyes only</p>
+      <h3 class="stash-title">The Secret Amie Stash</h3>
+      <p class="stash-sub">Amie has been hiding something under the couch. It’s locked.</p>
+      <form class="stash-form" id="stashForm" autocomplete="off">
+        <input id="stashPw" type="password" placeholder="Password" aria-label="Stash password" autocomplete="off" required>
+        <button type="submit" id="stashBtn">Unlock 🔓</button>
+      </form>
+      <p class="stash-msg" id="stashMsg" role="status" aria-live="polite"></p>
+    </div>
+    <div class="stash-gallery" id="stashGallery" hidden></div>
+  </div>
   <footer class="foot">Made with love (and treats) for Lauren · <a href="#top">back to the top ↑</a><br><span class="credit">Music: “Fluffing a Duck” by Kevin MacLeod (<a href="https://incompetech.com" rel="noopener">incompetech.com</a>), licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a></span></footer>
 </section>
 
@@ -183,5 +198,6 @@
 <script src="js/main.js"></script>
 <script type="module" src="js/gift3d.js"></script>
 <script type="module" src="js/tunnel3d.js"></script>
+<script src="js/stash.js"></script>
 </body>
 </html>

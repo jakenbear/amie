@@ -276,3 +276,32 @@ body.locked{overflow:hidden}
   }
 }
 @media (prefers-reduced-motion:reduce){.gift-hint,.gift-fallback{animation:none}}
+
+/* SECRET STASH */
+.stash{max-width:880px;margin:90px auto 0;padding:0 22px;text-align:center}
+.vault{position:relative;background:linear-gradient(160deg,#2d2620,#1d1813);color:#efe6d6;border-radius:28px;padding:40px 24px 30px;box-shadow:0 30px 60px -30px rgba(30,20,10,.7),inset 0 0 0 3px #4a3d30;transition:opacity .5s,transform .5s var(--ease)}
+.vault .eyebrow{color:var(--latte)}
+.vault-door{position:relative;width:120px;height:120px;margin:0 auto 18px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#d9c3a0,#a88a62 60%,#7d6445);box-shadow:0 0 0 8px #3a3027,0 0 0 11px #6e5a45,0 14px 26px -10px #000;display:flex;align-items:center;justify-content:center}
+.dial{position:absolute;inset:18px;border-radius:50%;border:3px dashed rgba(60,45,30,.55);transition:transform 1s var(--ease)}
+.dial i{position:absolute;left:50%;top:-6px;width:6px;height:14px;margin-left:-3px;background:var(--blood);border-radius:3px}
+.vault-paw{font-size:38px;position:relative}
+.vault.open .dial{transform:rotate(540deg)}
+.vault.open .vault-door{animation:doorpop .6s var(--ease)}
+@keyframes doorpop{50%{transform:scale(1.15)}}
+.vault.gone{display:none}
+.stash-title{font-size:clamp(30px,6vw,52px);line-height:1;margin:4px 0 8px}
+.stash-sub{color:#cbbda6;margin:0 0 20px}
+.stash-gallery .stash-sub{color:var(--ink-2)}
+.stash-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.stash-form input{flex:1 1 200px;max-width:280px;border:2px solid #6e5a45;background:#14100c;color:#fff;border-radius:99px;padding:14px 18px;font:500 16px Inter;outline:none}
+.stash-form input:focus{border-color:var(--latte)}
+.stash-form button{border:0;border-radius:99px;padding:14px 22px;background:var(--latte);color:#1d1813;font:700 15px Inter;cursor:pointer}
+.stash-form button:disabled{opacity:.6}
+.stash-msg{min-height:24px;margin:16px 0 0;font:600 18px Caveat,cursive;font-size:22px;color:#ffd9c2}
+.vault.shake{animation:shake .45s}
+@keyframes shake{20%{transform:translateX(-10px) rotate(-1deg)}40%{transform:translateX(9px) rotate(1deg)}60%{transform:translateX(-6px)}80%{transform:translateX(4px)}}
+.stash-grid{columns:2;column-gap:10px;text-align:left}
+@media (min-width:700px){.stash-grid{columns:3}}
+.stash-tile{break-inside:avoid;margin:0 0 10px;border-radius:12px;overflow:hidden;background:#e9e1d3;position:relative;cursor:zoom-in;animation:up .5s var(--ease-out) both}
+.stash-tile img{width:100%;height:100%;object-fit:cover;display:block}
+.stash-tile figcaption{position:absolute;left:8px;bottom:8px;font:700 10px/1 Inter;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,252,246,.9);padding:5px 7px;border-radius:99px}

@@ -28,3 +28,7 @@ Background music starts when the gift is opened; the floating button (bottom-lef
 - **Birthday note:** the `#lauren` section in `index.html`.
 
 Preview locally: `python3 -m http.server` in this folder, then open http://localhost:8000.
+
+## Secret Amie Stash
+
+At the bottom of the page is a password-locked gallery of Amie with Lauren. The photos are encrypted with AES-256-GCM using a key derived from the password (PBKDF2-SHA256, 600,000 iterations, random salt) and decrypted only in the visitor's browser. Only ciphertext is in this repo (`stash/*.bin`, plus `stash/meta.json` with the salt and parameters). No plaintext photos are committed and the password is not stored anywhere in the repo.
