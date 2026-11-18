@@ -18,11 +18,33 @@
 <link rel="preload" as="image" href="img/full/a1352.webp" media="(min-aspect-ratio: 1/1)">
 <link rel="preload" as="image" href="img/full/a1623.webp" media="(max-aspect-ratio: 1/1)">
 <link rel="stylesheet" href="css/style.css">
+<link rel="modulepreload" href="vendor/three.min.js">
 </head>
-<body>
+<body class="locked">
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- GIFT INTRO (2D fallback by default; js/gift3d.js upgrades it to a 3D box when WebGL is available) -->
+<div id="gift" class="gift" role="dialog" aria-modal="true" aria-label="A present for Lauren">
+  <div class="gift-stage" id="giftStage">
+    <button class="gift-fallback" id="giftFallback" type="button" aria-label="Open your present">
+      <span class="gf-lid"></span><span class="gf-body"></span><span class="gf-bow">🎀</span>
+    </button>
+  </div>
+  <div class="gift-copy">
+    <p class="eyebrow">For Lauren</p>
+    <h2>Someone left you a present</h2>
+    <p class="gift-hint" id="giftHint">Tap the box to open it</p>
+  </div>
+  <button class="gift-skip" id="giftSkip" type="button">Skip intro →</button>
+</div>
+
+<!-- MUSIC: swap the src below for Jake's own song (mp3, ideally under 5 MB) -->
+<audio id="bgm" src="audio/fluffing-a-duck.mp3" preload="none" loop></audio>
+<button class="mute" id="muteBtn" type="button" aria-label="Mute music" hidden><span class="eq"><i></i><i></i><i></i></span><span class="mute-ico">🔊</span></button>
 
 <nav class="dots" aria-label="Sections">
   <a href="#story" title="Her story"></a>
+  <a href="#tunnel" title="Memory Lane"></a>
   <a href="#jindo" title="Jindo facts"></a>
   <a href="#devil" title="The White Devil"></a>
   <a href="#admirers" title="Admirers"></a>
@@ -54,6 +76,20 @@
     <p class="lede">From a small white blur to the undisputed ruler of the park. Tap any burst to flip through it again, tap any photo to see it big.</p>
   </div>
   <div id="timeline" class="timeline"></div>
+</section>
+
+<!-- MEMORY TUNNEL (3D via js/tunnel3d.js; flat strip fallback without WebGL / with reduced motion) -->
+<section id="tunnel" class="tunnel flat">
+  <div class="tunnel-sticky">
+    <canvas id="tunnelCanvas" aria-hidden="true"></canvas>
+    <div class="tunnel-year" id="tunnelYear" aria-hidden="true"></div>
+    <div class="tunnel-copy" id="tunnelCopy">
+      <p class="eyebrow">Memory Lane</p>
+      <h2>Fly through the camera roll</h2>
+      <p class="tunnel-hint">Keep scrolling ↓</p>
+    </div>
+    <div class="tunnel-fallback" id="tunnelFallback"></div>
+  </div>
 </section>
 
 <!-- NAP STRIP -->
@@ -124,7 +160,7 @@
     </div>
     <button class="confetti-btn" id="confettiBtn" type="button">Throw a party 🎉</button>
   </div>
-  <footer class="foot">Made with love (and treats) for Lauren · <a href="#top">back to the top ↑</a></footer>
+  <footer class="foot">Made with love (and treats) for Lauren · <a href="#top">back to the top ↑</a><br><span class="credit">Music: “Fluffing a Duck” by Kevin MacLeod (<a href="https://incompetech.com" rel="noopener">incompetech.com</a>), licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a></span></footer>
 </section>
 
 </main>
@@ -142,5 +178,7 @@
 <script src="data/photos.js"></script>
 <script src="data/admirers.js"></script>
 <script src="js/main.js"></script>
+<script type="module" src="js/gift3d.js"></script>
+<script type="module" src="js/tunnel3d.js"></script>
 </body>
 </html>

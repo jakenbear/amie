@@ -208,4 +208,102 @@
   };
   $('#confettiBtn').onclick = fire;
   new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { setTimeout(fire, 400); o.disconnect(); } }), { threshold: 0.6 }).observe($('.bday'));
+
+  /* ======================= v2 additions ======================= */
+  const body = document.body;
+
+  /* ---------- music ---------- */
+  const audioEl = $('#bgm'), muteBtn = $('#muteBtn');
+  let actx = null, gain = null, muted = false, musicStarted = false, usingEl = false, bufP = null;
+  const VOL = 0.5;
+  const prefetch = () => bufP || (bufP = fetch(audioEl.getAttribute('src')).then(r => { if (!r.ok) throw new Error('audio ' + r.status); return r.arrayBuffer(); }));
+  const playEl = () => { usingEl = true; audioEl.loop = true; audioEl.volume = VOL; audioEl.muted = muted; const p = audioEl.play(); if (p) p.catch(() => {}); };
+  const trimLoop = b => { // find first/last audible sample so the loop is seamless
+    const d = b.getChannelData(0), th = 0.003; let s = 0, e = d.length - 1;
+    while (s < d.length && Math.abs(d[s]) < th) s++;
+    while (e > s && Math.abs(d[e]) < th) e--;
+    return [s / b.sampleRate, (e + 1) / b.sampleRate];
+  };
+  const startMusic = () => {
+    if (musicStarted) return; musicStarted = true; muteBtn.hidden = false;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return playEl();
+    try {
+      actx = new AC(); gain = actx.createGain(); gain.gain.value = 0; gain.connect(actx.destination);
+      if (actx.state === 'suspended') actx.resume();
+      prefetch().then(ab => new Promise((res, rej) => actx.decodeAudioData(ab, res, rej))).then(b => {
+        const [ls, le] = trimLoop(b);
+        const src = actx.createBufferSource(); src.buffer = b; src.loop = true; src.loopStart = ls; src.loopEnd = le;
+        src.connect(gain); src.start(0, ls);
+        gain.gain.setValueAtTime(0, actx.currentTime); gain.gain.linearRampToValueAtTime(muted ? 0 : VOL, actx.currentTime + 1.2);
+      }).catch(() => { try { actx.close(); } catch (e) {} actx = null; playEl(); });
+    } catch (e) { actx = null; playEl(); }
+  };
+  const setMuted = m => {
+    muted = m; muteBtn.classList.toggle('muted', m);
+    $('.mute-ico', muteBtn).textContent = m ? '🔇' : '🔊';
+    muteBtn.setAttribute('aria-label', m ? 'Unmute music' : 'Mute music');
+    if (actx && gain) gain.gain.setTargetAtTime(m ? 0 : VOL, actx.currentTime, 0.08);
+    if (usingEl) audioEl.muted = m;
+  };
+  muteBtn.onclick = () => setMuted(!muted);
+  document.addEventListener('visibilitychange', () => {
+    if (actx) document.hidden ? actx.suspend() : actx.resume();
+    else if (usingEl) document.hidden ? audioEl.pause() : (!audioEl.ended && audioEl.play().catch(() => {}));
+  });
+  const idle = window.requestIdleCallback || (f => setTimeout(f, 1500));
+  if (!(navigator.connection && navigator.connection.saveData)) idle(() => prefetch().catch(() => {}));
+
+  /* ---------- gift / unwrap ---------- */
+  const gift = $('#gift');
+  let revealed = false;
+  const reveal = ({ confetti = true } = {}) => {
+    if (revealed) return; revealed = true;
+    if (confetti) fire();
+    gift.classList.add('opening');
+    setTimeout(() => { gift.classList.add('gone'); body.classList.remove('locked'); }, confetti ? 650 : 50);
+    setTimeout(() => { gift.remove(); document.dispatchEvent(new CustomEvent('amie:revealed')); }, 1600);
+  };
+  $('#giftFallback').onclick = () => { startMusic(); reveal(); };
+  $('#giftSkip').onclick = () => { startMusic(); reveal({ confetti: false }); };
+  addEventListener('keydown', e => { if (!revealed && (e.key === 'Enter' || e.key === ' ') && document.activeElement === body) { e.preventDefault(); startMusic(); reveal(); } });
+  if (location.hash && location.hash !== '#top') { reveal({ confetti: false }); }
+
+  window.Amie = { startMusic, reveal, fire, openLB, photos: P, reduce, isRevealed: () => revealed };
+
+  /* ---------- memory tunnel picks + flat fallback ---------- */
+  const tunnelPool = P.filter(p => p.t !== 'dogs');
+  const TN = 36, stepT = tunnelPool.length / TN;
+  const tunnelIds = Array.from({ length: TN }, (_, i) => tunnelPool[Math.floor(i * stepT)].id);
+  window.AMIE_TUNNEL = tunnelIds;
+  const tf = $('#tunnelFallback');
+  tunnelIds.forEach(id => { const el = h(`<figure><img src="${thumb(id)}" alt="Amie" loading="lazy" decoding="async"></figure>`); el.onclick = () => openLB(tunnelIds, id); tf.appendChild(el); });
+
+  /* ---------- parallax + progress ---------- */
+  const prog = $('#progress');
+  const heroPic = $('.hero picture'), heroText = $('.hero-text');
+  const para = [...document.querySelectorAll('.ch-year, .devil-title, .section-head h2, .wanted-wall, .fact.photo img')];
+  const speeds = new Map(para.map(el => [el, el.classList.contains('ch-year') ? 0.18 : el.classList.contains('wanted-wall') ? -0.05 : el.matches('.fact.photo img') ? 0.08 : 0.06]));
+  document.querySelectorAll('.fact.photo img').forEach(i => { i.style.height = '116%'; i.style.top = '-8%'; });
+  let ticking = false;
+  const onScroll = () => {
+    ticking = false;
+    const y = scrollY, H = document.documentElement.scrollHeight - innerHeight;
+    prog.style.transform = `scaleX(${H > 0 ? Math.min(1, y / H) : 0})`;
+    if (reduce) return;
+    if (y < innerHeight * 1.2) {
+      heroPic.style.transform = `translate3d(0,${y * 0.35}px,0)`;
+      heroText.style.transform = `translate3d(0,${y * -0.12}px,0)`;
+      heroText.style.opacity = String(Math.max(0, 1 - y / (innerHeight * 0.7)));
+    }
+    const vh = innerHeight;
+    para.forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > vh + 200) return;
+      const off = (r.top + r.height / 2 - vh / 2) * speeds.get(el);
+      el.style.translate = `0 ${off.toFixed(1)}px`;
+    });
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  addEventListener('resize', onScroll); onScroll();
 })();
