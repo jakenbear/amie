@@ -141,7 +141,7 @@
   });
   const hunt = P.filter(p => p.t === 'hunt').map(p => p.id);
   const ev = $('#evidence');
-  hunt.forEach((id, i) => { const p = byId[id]; const el = h(`<figure class="ev pop"><img src="${thumb(id)}" srcset="${thumb(id)} 420w, ${full(id)} 1200w" sizes="(min-width:800px) 25vw, 50vw" alt="Amie on chipmunk patrol" loading="lazy" decoding="async"><span class="stamp">CAM ${String(i + 1).padStart(2, '0')} · ${p.d || '????'}</span><span class="rec"></span></figure>`); el.onclick = () => openLB(hunt, id); ev.appendChild(watch(el, (i % 4) * 50)); });
+  hunt.forEach((id, i) => { const p = byId[id]; const el = h(`<figure class="ev pop"><img src="${thumb(id)}" srcset="${thumb(id)} 420w, ${full(id)} 1200w" sizes="(min-width:800px) 25vw, 50vw" alt="Amie on chipmunk patrol" loading="lazy" decoding="async"><span class="stamp">CAM ${String(i + 1).padStart(2, '0')} · ${p.d ? p.d.slice(2) : '??'}</span><span class="rec"></span></figure>`); el.onclick = () => openLB(hunt, id); ev.appendChild(watch(el, (i % 4) * 50)); });
   const CHIP = [
     { ico: '🥜', t: 'Cheek pouches', p: 'Chipmunks stuff food into stretchy cheek pouches that can expand to about three times the size of their head. Very useful when fleeing a white devil.' },
     { ico: '🕳️', t: 'Underground mansions', p: 'Eastern chipmunk burrows can run for more than 3 metres, with separate chambers for sleeping and food storage, and hidden entrances.' },
@@ -283,7 +283,7 @@
   /* ---------- parallax + progress ---------- */
   const prog = $('#progress');
   const heroPic = $('.hero picture'), heroText = $('.hero-text');
-  const para = [...document.querySelectorAll('.ch-year, .devil-title, .section-head h2, .wanted-wall, .fact.photo img')];
+  const para = [...document.querySelectorAll('.ch-year, .devil-title, .section-head h2, .fact.photo img')];
   const speeds = new Map(para.map(el => [el, el.classList.contains('ch-year') ? 0.18 : el.classList.contains('wanted-wall') ? -0.05 : el.matches('.fact.photo img') ? 0.08 : 0.06]));
   document.querySelectorAll('.fact.photo img').forEach(i => { i.style.height = '116%'; i.style.top = '-8%'; });
   let ticking = false;
