@@ -27,7 +27,7 @@ function init() {
   const scene = new T.Scene(); scene.background = new T.Color(BG); scene.fog = new T.Fog(BG, 3, 19);
   const camera = new T.PerspectiveCamera(60, 1, 0.1, 60);
   const SP = 2.3, R = mobile ? 1.15 : 2.0;
-  const NEAR0 = mobile ? 0.9 : 0.3, NEARW = mobile ? 2.2 : 1.3;
+  let NEAR0 = 0.3, NEARW = 1.3; // narrow screens fade/cull planes much earlier (set in resize)
   const START = 3, END = -(ids.length * SP) - 1;
 
   const items = ids.map((id, i) => {
@@ -62,7 +62,8 @@ function init() {
 
   const resize = () => {
     const w = sticky.clientWidth, hgt = sticky.clientHeight;
-    renderer.setSize(w, hgt, false); camera.aspect = w / hgt; camera.fov = w / hgt < 0.8 ? 72 : 60; camera.updateProjectionMatrix();
+    renderer.setSize(w, hgt, false); camera.aspect = w / hgt;
+    const narrow = camera.aspect < 0.8; NEAR0 = narrow ? 3.2 : 0.3; NEARW = narrow ? 1.6 : 1.3; camera.fov = w / hgt < 0.8 ? 72 : 60; camera.updateProjectionMatrix();
   };
   resize(); addEventListener('resize', resize);
 
@@ -86,8 +87,9 @@ function init() {
       it.g.position.y = it.base + Math.sin(now / 1400 + it.phase) * 0.06;
       if (it.loaded && it.fade < 1) it.fade = Math.min(1, it.fade + 0.06);
       const dz = camZ - it.g.position.z, near = Math.min(1, Math.max(0, (dz - NEAR0) / NEARW));
-      it.frameMat.opacity = near; it.mat.opacity = near * it.fade;
-      it.g.visible = near > 0.01;
+      const o = near * near; // steeper fade so near planes vanish before they get big
+      it.frameMat.opacity = o; it.mat.opacity = o * it.fade;
+      it.g.visible = o > 0.12;
     });
     // nearest photo ahead -> year label
     const ahead = items.find(it => it.g.position.z < camZ - 1.5);

@@ -37,11 +37,11 @@
 
   /* ---------- timeline ---------- */
   const CH = [
-    { y: '2022', title: 'The White Blur Arrives', blurb: 'New home, new park, new everything. She sniffed all of it. Twice. The neighbourhood chipmunks did not yet know what was coming.', cover: 'a0082' },
-    { y: '2023', title: 'First Snow, Many Sticks', blurb: 'A Jindo in her element: knee-deep in snow, nose-deep in leaves, and fully committed to every single stick in the ravine.', cover: 'a0474' },
+    { y: '2022', title: 'Gotcha Day', blurb: 'She arrived about ten years into a life we can only guess at, and moved in like she had always lived here. New home, new park, new everything. She sniffed all of it. Twice. The neighbourhood chipmunks did not yet know what was coming.', cover: 'a0082' },
+    { y: '2023', title: 'First Winter With Us', blurb: 'A Jindo in her element: knee-deep in snow, nose-deep in leaves, and fully committed to every single stick in the ravine.', cover: 'a0541' },
     { y: '2024', title: 'Queen of the Park', blurb: 'Fan club growing. Patience for said fan club: shrinking. Naps: world class.', cover: 'a1123' },
-    { y: '2025', title: 'Peak Princess Era', blurb: 'Dandelions, sunshine, the good harness, and a reputation that now arrives at the park before she does.', cover: 'a1494' },
-    { y: '2026', title: 'Right Now', blurb: 'Still the whitest dog in any room. Still convinced the couch is hers. (It is.)', cover: 'a1687' },
+    { y: '2025', title: 'Silver-Muzzle Princess Era', blurb: 'Dandelions, sunshine, the good harness, and a reputation that now arrives at the park before she does.', cover: 'a1494' },
+    { y: '2026', title: 'Right Now', blurb: 'Almost fourteen, and still the whitest dog in any room. Still the fastest nose at the park. Still convinced the couch is hers. (It is.)', cover: 'a1687' },
     { y: 'bonus', title: 'Greatest Hits', blurb: 'Undated, unforgettable. The camera roll classics.', cover: 'a1769', label: '★' }
   ];
   const tl = $('#timeline');
@@ -113,6 +113,7 @@
     { photo: 'a1124' },
     { ico: '💛', t: 'One-person (or two-person) dogs', p: 'Jindos tend to bond deeply with their own family and can be reserved, even aloof, with strangers. Earning a Jindo’s trust is a big deal.' },
     { ico: '🦘', t: 'Escape artists', p: 'Agile, athletic and very curious, Jindos are known for clearing surprising heights. Good fences make good Jindos.' },
+    { ico: '⏳', t: 'Built to last', p: 'Jindos are a hardy, medium-sized breed and commonly live around 12 to 15 years. Amie is busy proving the upper end of that range.' },
     { ico: '🎨', t: 'Not always white', p: 'Jindos come in white, fawn, grey, black, black-and-tan and brindle. White and fawn are the most common. Amie, obviously, chose white.' }
   ];
   const fx = $('#facts'); let n = 0;
@@ -127,8 +128,8 @@
   /* ---------- white devil ---------- */
   const WANTED = [
     { id: 'a0215', alias: 'THE WHITE DEVIL', crime: 'Staring at the base of a tree for 45 minutes with intent.', reward: '1,000 ACORNS' },
-    { id: 'a1123', alias: 'THE GHOST OF THE RAVINE', crime: 'Appearing silently. Disappearing silently. Leaving only fluff.', reward: '750 ACORNS' },
-    { id: 'a0474', alias: 'BLAZE ORANGE', crime: 'Wore a high-vis vest to the park as a taunt.', reward: '500 SUNFLOWER SEEDS' },
+    { id: 'a1123', alias: 'THE GHOST OF THE RAVINE', crime: 'Appearing silently. Disappearing silently. Leaving only fluff. Active for over a decade.', reward: '750 ACORNS' },
+    { id: 'a0517', alias: 'THE SUNSET STALKER', crime: 'Patrolling at golden hour, when visibility is lowest and fluff is highest.', reward: '500 SUNFLOWER SEEDS' },
     { id: 'a1284', alias: 'THE NOSE', crime: 'Sniffing with malice aforethought. Burrow trespassing (nose only).', reward: '2 PEANUTS (FINAL OFFER)' },
     { id: 'a0786', alias: 'THE INNOCENT FACE', crime: 'Lulling victims into a false sense of security with those eyes.', reward: '1 PINECONE (LARGE)' },
     { id: 'a1769', alias: 'THE PALE MENACE', crime: 'Pretending to be a good girl to the humans. We know the truth.', reward: 'ETERNAL GLORY' }
